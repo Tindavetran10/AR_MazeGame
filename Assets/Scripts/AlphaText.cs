@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
-using TMPro; 
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine.UI;
 
 public class AlphaText : MonoBehaviour
 {
-    public float speedFade = 1f;
-    private float count;
-    public TextMeshProUGUI textMeshPro; 
+    public float minTime = 0.8f;
+    public float maxTime = 0.8f;
 
-    // Use this for initialization
-    void Start()
+    private float timer;
+    private Text textFlicker;
+
+    private void Start()
     {
-        if (textMeshPro == null)
-        {
-            Debug.LogError("TextMeshPro chưa được gán! Hãy gán nó trong Editor.");
-        }
+        textFlicker = GetComponent<Text>();
+        timer = Random.Range(minTime, maxTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        count += speedFade * Time.deltaTime;
-        Color currentColor = textMeshPro.color;
-        float alpha = Mathf.Sin(count) * 0.5f + 0.5f; 
-        textMeshPro.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+        timer -= Time.deltaTime;
+        if(timer <= 0 )
+        {
+            textFlicker.enabled = !textFlicker.enabled;
+            timer = Random.Range(minTime, maxTime);
+        }
     }
 }

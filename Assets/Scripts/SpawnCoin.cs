@@ -5,60 +5,42 @@ using UnityEngine;
 public class SpawnCoin : MonoBehaviour
 {
     public GameObject coinPrefab;
-    public Transform spawnArea;
-    public List<GameObject> walls;
+    public Transform[] spawnPoints; // Mảng các điểm spawn
+    public static SpawnCoin instance;
 
-    public static SpawnCoin instance; // Singleton để dễ dàng gọi từ script khác
+    private int lastSpawnIndex = -1; // Biến lưu lại vị trí spawn trước đó để tránh trùng lặp
 
     void Awake()
     {
-        instance = this; // Gán đối tượng hiện tại cho instance
+        instance = this;
     }
 
     void Start()
     {
-        SpawnNewCoin(); // Spawn đồng xu đầu tiên
+        SpawnNewCoin();
     }
 
     public void SpawnNewCoin()
     {
-        Vector3 spawnPosition;
-        bool validPosition = false;
+        int randomIndex = GetRandomSpawnIndex(); // Chọn điểm spawn ngẫu nhiên từ mảng
 
-        // Tạo vị trí spawn hợp lệ trên các đối tượng có tag là "Plane" và tránh các đối tượng có tag là "Wall"
-        while (!validPosition)
+        // Lấy vị trí của điểm spawn ngẫu nhiên
+        Vector3 spawnPosition = spawnPoints[randomIndex].position;
+
+        // Spawn đồng xu tại vị trí đã chọn
+        Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    // Hàm chọn chỉ số spawn point ngẫu nhiên, tránh trùng với lần trước
+    private int GetRandomSpawnIndex()
+    {
+        int randomIndex;
+        do
         {
-            spawnPosition = new Vector3(
-                Random.Range(spawnArea.position.x - spawnArea.localScale.x / 2, spawnArea.position.x + spawnArea.localScale.x / 2),
-                spawnArea.position.y,
-                Random.Range(spawnArea.position.z - spawnArea.localScale.z / 2, spawnArea.position.z + spawnArea.localScale.z / 2)
-            );
+            randomIndex = Random.Range(0, spawnPoints.Length);
+        } while (randomIndex == lastSpawnIndex); // Đảm bảo không trùng với lần spawn trước
 
-            Collider[] hits = Physics.OverlapSphere(spawnPosition, 0.5f);
-            bool isOnPlane = false;
-            bool collidesWithWall = false;
-
-            foreach (Collider hit in hits)
-            {
-                if (hit.CompareTag("Plane"))
-                {
-                    isOnPlane = true; // Vị trí hợp lệ nếu trên mặt phẳng "Plane"
-                }
-
-                if (hit.CompareTag("Wall"))
-                {
-                    collidesWithWall = true; // Vị trí không hợp lệ nếu chạm "Wall"
-                    break;
-                }
-            }
-
-            if (isOnPlane && !collidesWithWall)
-            {
-                validPosition = true;
-
-                // Tạo đồng xu tại vị trí hợp lệ
-                Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
-            }
-        }
+        lastSpawnIndex = randomIndex;
+        return randomIndex;
     }
 }

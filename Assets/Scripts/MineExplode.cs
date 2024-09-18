@@ -40,7 +40,7 @@ public class MineExplode : MonoBehaviour
         }
     }
 
-    private void DeadPanel()
+    public void DeadPanel()
     {
         gameOverPanel.SetActive(true);  
         Time.timeScale = 0f;            

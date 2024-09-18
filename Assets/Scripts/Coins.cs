@@ -7,6 +7,8 @@ public class Coins : MonoBehaviour
 {
     private int Coin = 0;
     public TextMeshProUGUI coinText;
+
+    
     private void OnTriggerEnter(Collider other)
     {
         // Kiểm tra xem đối tượng chạm vào là "Player" (bóng) hay không

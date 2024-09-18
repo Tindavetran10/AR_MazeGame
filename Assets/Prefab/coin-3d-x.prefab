@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7484219368554504814}
   - component: {fileID: 1878873807488794155}
   - component: {fileID: 2891537073627044775}
-  - component: {fileID: 74807789505892023}
+  - component: {fileID: 8907119249704649944}
   m_Layer: 0
   m_Name: coin-3d-x
   m_TagString: Untagged
@@ -105,9 +105,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.1936089
-  m_Center: {x: 0.12539944, y: 0.19909784, z: 0.000000099067364}
---- !u!114 &74807789505892023
+  m_Radius: 1.7401017
+  m_Center: {x: 0.12539878, y: 0.1149536, z: 0.00000019813473}
+--- !u!114 &8907119249704649944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6178640220901584013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae817f78f0ffa5d409a0618e62268b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 275651b74e7191e4e987340367e35353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theCoin: {fileID: 6178640220901584013}

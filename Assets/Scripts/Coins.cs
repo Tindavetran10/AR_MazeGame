@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    private int Coin = 0;
+    private static int Coin = 0; 
     public TextMeshProUGUI coinText;
 
-    
+    private void Update()
+    {
+        gameObject.transform.Rotate(0f, 1f, 0f, Space.Self);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Kiểm tra xem đối tượng chạm vào là "Player" (bóng) hay không
         if (other.CompareTag("Player"))
         {
-            Coin++;  
+            Coin++;
             coinText.text = "Point: " + Coin.ToString();
-            SpawnCoin.instance.SpawnNewCoin();
             Destroy(gameObject);
         }
     }

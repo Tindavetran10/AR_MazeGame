@@ -48,7 +48,7 @@ ExportedObj/
 *.VC.db
 
 # Ignore somedata16 file (or any file similar)
-/somedata16
+somedata16
 
 # Unity3D generated meta files
 *.pidb.meta

@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/OpenMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/ARMazeProject.unity
     guid: dcf7a456cd8df7a4e93468eac51f6ea1
+  - enabled: 1
+    path: Assets/Scenes/EndMenu.unity
+    guid: 83b084fc6a476d94a8e6ce206dbde5cf
   m_configObjects: {}
